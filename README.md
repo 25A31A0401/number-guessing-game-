@@ -1,0 +1,1 @@
+The Number Guessing Game is a simple console-based program written in the C programming language. In this game, the computer randomly selects a number within a specified range (usually between 1 and 100), and the player tries to guess that number.
