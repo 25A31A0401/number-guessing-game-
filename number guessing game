@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int number, userGuess, compGuess;
+    int userAttempts = 0, compAttempts = 0;
+    int low = 1, high = 10;
+
+    srand(time(0));
+
+    printf("=== Number Guessing Game (1 to 10) ===\n");
+
+    // Computer selects number
+    number = rand() % 10 + 1;
+    printf("\n[DEBUG] Computer's number is: %d\n", number);
+
+    // -------- USER TURN --------
+    printf("\nUser's Turn:\n");
+    do {
+        printf("Enter your guess: ");
+        scanf("%d", &userGuess);
+        userAttempts++;
+
+        if (userGuess > number) {
+            printf("Too high!\n");
+        } else if (userGuess < number) {
+            printf("Too low!\n");
+        } else {
+            printf("Correct! You guessed the number.\n");
+        }
+
+    } while (userGuess != number);
+
+    // -------- COMPUTER TURN --------
+    printf("\nComputer's Turn (guessing your number):\n");
+    printf("Assume your number is also between 1 and 10.\n");
+
+    // For simplicity, computer will guess same number
+    low = 1;
+    high = 10;
+
+    do {
+        compGuess = (low + high) / 2;
+        compAttempts++;
+
+        printf("Computer guesses: %d\n", compGuess);
+
+        if (compGuess > number) {
+            printf("Too high\n");
+            high = compGuess - 1;
+        } else if (compGuess < number) {
+            printf("Too low\n");
+            low = compGuess + 1;
+        } else {
+            printf("Computer guessed correctly!\n");
+        }
+
+    } while (compGuess != number);
+
+    // -------- RESULT --------
+    printf("\n=== Result ===\n");
+    printf("Correct number was: %d\n", number);
+    printf("User attempts: %d\n", userAttempts);
+    printf("Computer attempts: %d\n", compAttempts);
+
+    if (userAttempts < compAttempts) {
+        printf("Computer is the loser!\n");
+    } else if (compAttempts < userAttempts) {
+        printf("User is the loser!\n");
+    } else {
+        printf("It's a tie! No loser.\n");
+    }
+
+    return 0;
+}
